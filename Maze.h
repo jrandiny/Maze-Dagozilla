@@ -17,7 +17,7 @@ class Maze{
     private:
         vector< vector<int> > peta;
         priority_queue<Node, vector<Node>, PembandingNode> daftarNode;
-        queue<Node> nodeSudah;
+        vector<Node> nodeSudah;
         int startX;
         int startY;
         int goalX;

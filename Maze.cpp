@@ -78,13 +78,9 @@ bool Maze::isNodeExist(Node input){
         }
 	}
 
-    queue<Node> sementaraSudah = nodeSudah;
-
-    while (!sementaraSudah.empty())
+    for (Node t : nodeSudah)
 	{
-		Node t =  sementaraSudah.front();
         cout << "Posisi : ("<<t.getX()<<","<<t.getY()<<")"<<endl;
-		sementaraSudah.pop();
         if((t.getX()==input.getX())&&(t.getY()==input.getY())){
             ketemu = true;
         }
@@ -114,14 +110,14 @@ void Maze::solve(){
     awal.setGCost(0);
 
     openSekitar(awal);
-    nodeSudah.push(awal);
+    nodeSudah.push_back(awal);
     // tunggu();
 
     while(!solved){
         cout<<endl<<"------------------------------"<<endl;
         Node t = daftarNode.top();
         cout<<"START openSekitar FOR "<<t.getX()<<","<<t.getY()<<endl;
-        nodeSudah.push(t);
+        nodeSudah.push_back(t);
         openSekitar(t);
         daftarNode.pop();
         //tunggu();
@@ -147,14 +143,11 @@ void Maze::solve(){
 }
 
 Node Maze::nodeSebelum(Node input){
-    queue<Node> sementaraSudah = nodeSudah;
 
     Node sebelum;
 
-    while (!sementaraSudah.empty())
+    for (Node t : nodeSudah)
 	{
-		Node t =  sementaraSudah.front();
-		sementaraSudah.pop();
         if((t.getX()==input.getOriginX())&&(t.getY()==input.getOriginY())){
             sebelum = t;
         }
