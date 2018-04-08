@@ -23,6 +23,9 @@ class Maze{
         int goalX;
         int goalY;
 
+        Node awal;
+        Node finish;
+
         bool solved;
 
         void openSekitar(Node input);
@@ -38,6 +41,7 @@ class Maze{
         void solve();
         bool isSolved();
         void setMaze(vector< vector<int> > peta);
+        Node nodeSebelum(Node input);
 
 };
 #endif

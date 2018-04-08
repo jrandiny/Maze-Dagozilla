@@ -35,6 +35,7 @@ void Maze::openSekitar(Node input){
                         cout<<"lulus cek koordinat"<<endl;
                         //cek bukan halangan
                         if(peta[i][j]==3){
+                            finish = Node(x,y,j,i,goalX,goalY,input.getGCost()+1);
                             cout<<"HORE"<<endl;
                             cout<<"posisi hore : ("<<j<<","<<i<<")"<<endl;
                             cout<<endl<<endl<<endl<<endl<<endl;
@@ -109,7 +110,7 @@ void Maze::solve(){
     cout << "start : ("<<startX<<","<<startY<<")"<<endl;
     cout << "goal : ("<<goalX<<","<<goalY<<")"<<endl;
 
-    Node awal(startX,startY,startX,startY,goalX,goalY,0);
+    awal = Node(startX,startY,startX,startY,goalX,goalY,0);
     awal.setGCost(0);
 
     openSekitar(awal);
@@ -129,6 +130,37 @@ void Maze::solve(){
     cout<<endl<<endl<<endl;
     cout<<"TERSELESAIKAN"<<endl;
 
+    cout<<"LIAT CARA"<<endl;
+
+    Node cari = finish;
+
+    while(true){
+        cout<<"("<<cari.getX()<<","<<cari.getY()<<")"<<endl;
+        if(!((cari.getX()==startX)&&(cari.getY()==startY))){
+            cari = nodeSebelum(cari);
+        }else{
+            break;
+        }
+
+    }
+
+}
+
+Node Maze::nodeSebelum(Node input){
+    queue<Node> sementaraSudah = nodeSudah;
+
+    Node sebelum;
+
+    while (!sementaraSudah.empty())
+	{
+		Node t =  sementaraSudah.front();
+		sementaraSudah.pop();
+        if((t.getX()==input.getOriginX())&&(t.getY()==input.getOriginY())){
+            sebelum = t;
+        }
+	}
+
+    return sebelum;
 }
 
 bool Maze::isSolved(){
