@@ -17,6 +17,14 @@ class Maze{
     private:
         vector< vector<int> > peta;
         priority_queue<Node, vector<Node>, PembandingNode> daftarNode;
+        //queue<Node> nodeBuangan;
+        int startX;
+        int startY;
+        int goalX;
+        int goalY;
+
+        void openSekitar(int x, int y);
+        bool isNodeExist(Node input);
 
 
     public:
@@ -24,7 +32,7 @@ class Maze{
         Maze(vector< vector<int> > peta);
 
         void solve();
-        void setMaze(Maze Input);
+        void setMaze(vector< vector<int> > peta);
 
 };
 #endif

@@ -7,6 +7,8 @@ using namespace std;
 Node::Node(){
     originX = -1;
     originY = -1;
+    x = -1;
+    y = -1;
     goalX = -1;
     goalY = -1;
     hCost = -1;
@@ -15,25 +17,16 @@ Node::Node(){
 
 }
 
-Node::Node(int originX, int originY, int goalX, int goalY){
+Node::Node(int originX, int originY, int x, int y, int goalX, int goalY){
     this->originX = originX;
     this->originY = originY;
+    this->x = x;
+    this->y = y;
     this->goalX = goalX;
     this->goalY = goalY;
 
     //asumsi maze hanya vertikal dan horizontal
     this->gCost = 1;
-
-    calculate();
-}
-
-Node::Node(int originX, int originY, int goalX, int goalY, int gCost){
-    this->originX = originX;
-    this->originY = originY;
-    this->goalX = goalX;
-    this->goalY = goalY;
-
-    this->gCost = gCost;
 
     calculate();
 }
@@ -58,20 +51,27 @@ int Node::getOriginY() const{
     return originY;
 }
 
+int Node::getX() const{
+    return x;
+}
+
+int Node::getY() const{
+    return y;
+}
+
 void Node::setOrigin(int x, int y){
     originX = x;
     originY = y;
-    if((goalX != -1) && (gCost != -1)){
-        calculate();
-    }
+}
+
+void Node::setXY(int x, int y){
+    this->x = x;
+    this->y = y;
 }
 
 void Node::setGoal(int x, int y){
     goalX = x;
     goalY = y;
-    if((originX != -1) && (gCost != -1)){
-        calculate();
-    }
 }
 
 void Node::setGCost(int gCost){
@@ -80,9 +80,9 @@ void Node::setGCost(int gCost){
 
 void Node::calculate(){
 
-    if((originX != -1) && (goalX != -1)){
+    if((originX != -1) && (goalX != -1) && (x != -1)){
         //menggunakan manhattan heuristic
-        hCost = abs(goalX-originX) + abs(goalY-originY);
+        hCost = abs(goalX-x) + abs(goalY-y);
 
         fCost = gCost + hCost;
     }else{

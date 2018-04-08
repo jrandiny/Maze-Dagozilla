@@ -8,6 +8,8 @@ class Node{
         int fCost;
         int originX;
         int originY;
+        int x;
+        int y;
         int goalX;
         int goalY;
 
@@ -15,16 +17,18 @@ class Node{
 
     public:
         Node();
-        Node(int originX, int originY, int goalX, int goalY);
-        Node(int originX, int originY, int goalX, int goalY, int gCost);
+        Node(int originX, int originY, int x, int y, int goalX, int goalY);
 
         int getGCost() const;
         int getHCost() const;
         int getFCost() const;
         int getOriginX() const;
         int getOriginY() const;
+        int getX() const;
+        int getY() const;
 
         void setOrigin(int x, int y);
+        void setXY(int x, int y);
         void setGoal(int x, int y);
         void setGCost(int gCost);
 
