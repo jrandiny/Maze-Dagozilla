@@ -17,7 +17,7 @@ class Node{
 
     public:
         Node();
-        Node(int originX, int originY, int x, int y, int goalX, int goalY);
+        Node(int originX, int originY, int x, int y, int goalX, int goalY, int gCost);
 
         int getGCost() const;
         int getHCost() const;

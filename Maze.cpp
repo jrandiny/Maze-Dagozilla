@@ -12,29 +12,44 @@ bool PembandingNode::operator()(const Node& node1, const Node& node2) const{
 
 Maze::Maze(){
     peta = {{0,2,1,0,3},{0,0,1,0,0},{0,0,1,0,0},{0,0,1,0,0},{0,0,0,0,0}}; //default value
+    solved = false;
 }
 
 Maze::Maze(vector< vector<int> > peta){
     this->peta = peta;
+    solved = false;
 }
 
-void Maze::openSekitar(int x, int y){
-    for(int i = x-1; i<=x+1;i++){
-        for(int j = y-1; j<=y+1;j++){
-            cout<<"posisi cek : ("<<i<<","<<j<<")"<<endl;
+void Maze::openSekitar(Node input){
+    int x = input.getX();
+    int y = input.getY();
+    for(int i = y-1; i<=y+1;i++){
+        for(int j = x-1; j<=x+1;j++){
+            cout<<"posisi cek : ("<<j<<","<<i<<")"<<endl;
             //cek di dalam boks
-            if((i>=0)&&(j>=0)){
-                //titik origin tidak dicek
-                if(!((i!=x)&&(j!=y))){
-                    //cek tidak diagonal
-                    if(!((i==x)&&(j==y))){
+            if((i>=0)&&(i<peta.size())&&(j<peta[0].size())&&(j>=0)){
+                //diagonal tidak boleh diagonal
+                if(!((j!=x)&&(i!=y))){
+                    //titik origin tidak dicek
+                    if(!((j==x)&&(i==y))){
+                        cout<<"lulus cek koordinat"<<endl;
                         //cek bukan halangan
+                        if(peta[i][j]==3){
+                            cout<<"HORE"<<endl;
+                            cout<<"posisi hore : ("<<j<<","<<i<<")"<<endl;
+                            cout<<endl<<endl<<endl<<endl<<endl;
+                            solved=true;
+                        }
                         if(peta[i][j]!=1){
                             //cek apakah sudah ada
-                            Node sementara(x,y,i,j,goalX,goalY);
-                            if(!isNodeExist(sementara))
-                            daftarNode.push(sementara);
-                            cout<<"insert"<<endl;
+                            Node sementara(x,y,j,i,goalX,goalY,input.getGCost()+1);
+                            if(!isNodeExist(sementara)){
+                                cout<<"old g cost "<<input.getGCost()<<endl;
+                                cout<<"new g cost "<<sementara.getGCost()<<endl;
+                                cout<<"new h cost "<<sementara.getHCost()<<endl;
+                                daftarNode.push(sementara);
+                                cout<<"insert"<<endl;
+                            }
                         }
                     }
                 }
@@ -62,6 +77,18 @@ bool Maze::isNodeExist(Node input){
         }
 	}
 
+    queue<Node> sementaraSudah = nodeSudah;
+
+    while (!sementaraSudah.empty())
+	{
+		Node t =  sementaraSudah.front();
+        cout << "Posisi : ("<<t.getX()<<","<<t.getY()<<")"<<endl;
+		sementaraSudah.pop();
+        if((t.getX()==input.getX())&&(t.getY()==input.getY())){
+            ketemu = true;
+        }
+	}
+
     return ketemu;
 }
 
@@ -82,18 +109,45 @@ void Maze::solve(){
     cout << "start : ("<<startX<<","<<startY<<")"<<endl;
     cout << "goal : ("<<goalX<<","<<goalY<<")"<<endl;
 
-    openSekitar(startX,startY);
+    Node awal(startX,startY,startX,startY,goalX,goalY,0);
+    awal.setGCost(0);
 
-    while (!daftarNode.empty())
+    openSekitar(awal);
+    nodeSudah.push(awal);
+    // tunggu();
+
+    while(!solved){
+        cout<<endl<<"------------------------------"<<endl;
+        Node t = daftarNode.top();
+        cout<<"START openSekitar FOR "<<t.getX()<<","<<t.getY()<<endl;
+        nodeSudah.push(t);
+        openSekitar(t);
+        daftarNode.pop();
+        //tunggu();
+    }
+
+    cout<<endl<<endl<<endl;
+    cout<<"TERSELESAIKAN"<<endl;
+
+}
+
+bool Maze::isSolved(){
+    return solved;
+}
+
+void Maze::tunggu(){
+    priority_queue<Node, vector<Node>, PembandingNode> sementara = daftarNode;
+
+    while (!sementara.empty())
 	{
-		Node t = daftarNode.top();
+		Node t = sementara.top();
 		cout << "origin : (" << t.getOriginX() << "," << t.getOriginY()<<")";
         cout << "| posisi : ("<<t.getX()<<","<<t.getY()<<")";
         cout << "| f cost :"<<t.getFCost()<<endl;
-		daftarNode.pop();
+		sementara.pop();
 	}
-
-
+    string abc;
+    cin>>abc;
 }
 
 void Maze::setMaze(vector< vector<int> > peta){

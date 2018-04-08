@@ -17,7 +17,7 @@ Node::Node(){
 
 }
 
-Node::Node(int originX, int originY, int x, int y, int goalX, int goalY){
+Node::Node(int originX, int originY, int x, int y, int goalX, int goalY, int gCost){
     this->originX = originX;
     this->originY = originY;
     this->x = x;
@@ -25,8 +25,8 @@ Node::Node(int originX, int originY, int x, int y, int goalX, int goalY){
     this->goalX = goalX;
     this->goalY = goalY;
 
-    //asumsi maze hanya vertikal dan horizontal
-    this->gCost = 1;
+    //asumsi awal
+    this->gCost = gCost;
 
     calculate();
 }
@@ -62,20 +62,24 @@ int Node::getY() const{
 void Node::setOrigin(int x, int y){
     originX = x;
     originY = y;
+    calculate();
 }
 
 void Node::setXY(int x, int y){
     this->x = x;
     this->y = y;
+    calculate();
 }
 
 void Node::setGoal(int x, int y){
     goalX = x;
     goalY = y;
+    calculate();
 }
 
 void Node::setGCost(int gCost){
     this->gCost = gCost;
+    calculate();
 }
 
 void Node::calculate(){
