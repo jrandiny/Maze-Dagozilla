@@ -25,31 +25,31 @@ void Maze::openSekitar(Node input){
     int y = input.getY();
     for(int i = y-1; i<=y+1;i++){
         for(int j = x-1; j<=x+1;j++){
-            cout<<"posisi cek : ("<<j<<","<<i<<")"<<endl;
+            clog<<"posisi cek : ("<<j<<","<<i<<")"<<endl;
             //cek di dalam boks
             if((i>=0)&&(i<peta.size())&&(j<peta[0].size())&&(j>=0)){
                 //diagonal tidak boleh diagonal
                 if(!((j!=x)&&(i!=y))){
                     //titik origin tidak dicek
                     if(!((j==x)&&(i==y))){
-                        cout<<"lulus cek koordinat"<<endl;
+                        clog<<"lulus cek koordinat"<<endl;
                         //cek bukan halangan
                         if(peta[i][j]==3){
                             finish = Node(x,y,j,i,goalX,goalY,input.getGCost()+1);
-                            cout<<"HORE"<<endl;
-                            cout<<"posisi hore : ("<<j<<","<<i<<")"<<endl;
-                            cout<<endl<<endl<<endl<<endl<<endl;
+                            clog<<"HORE"<<endl;
+                            clog<<"posisi hore : ("<<j<<","<<i<<")"<<endl;
+                            clog<<endl<<endl<<endl<<endl<<endl;
                             solved=true;
                         }
                         if(peta[i][j]!=1){
                             //cek apakah sudah ada
                             Node sementara(x,y,j,i,goalX,goalY,input.getGCost()+1);
                             if(!isNodeExist(sementara)){
-                                cout<<"old g cost "<<input.getGCost()<<endl;
-                                cout<<"new g cost "<<sementara.getGCost()<<endl;
-                                cout<<"new h cost "<<sementara.getHCost()<<endl;
+                                clog<<"old g cost "<<input.getGCost()<<endl;
+                                clog<<"new g cost "<<sementara.getGCost()<<endl;
+                                clog<<"new h cost "<<sementara.getHCost()<<endl;
                                 daftarNode.push(sementara);
-                                cout<<"insert"<<endl;
+                                clog<<"insert"<<endl;
                             }
                         }
                     }
@@ -64,14 +64,14 @@ bool Maze::isNodeExist(Node input){
 
     ketemu = false;
 
-    cout<<"cek apakah sudah ada node di : ("<<input.getX()<<","<<input.getY()<<")"<<endl;
+    clog<<"cek apakah sudah ada node di : ("<<input.getX()<<","<<input.getY()<<")"<<endl;
 
     priority_queue<Node, vector<Node>, PembandingNode> sementara = daftarNode;
 
     while (!sementara.empty())
 	{
 		Node t =  sementara.top();
-        cout << "Posisi : ("<<t.getX()<<","<<t.getY()<<")"<<endl;
+        clog << "Posisi : ("<<t.getX()<<","<<t.getY()<<")"<<endl;
 		sementara.pop();
         if((t.getX()==input.getX())&&(t.getY()==input.getY())){
             ketemu = true;
@@ -80,7 +80,7 @@ bool Maze::isNodeExist(Node input){
 
     for (Node t : nodeSudah)
 	{
-        cout << "Posisi : ("<<t.getX()<<","<<t.getY()<<")"<<endl;
+        clog << "Posisi : ("<<t.getX()<<","<<t.getY()<<")"<<endl;
         if((t.getX()==input.getX())&&(t.getY()==input.getY())){
             ketemu = true;
         }
@@ -103,8 +103,8 @@ void Maze::solve(){
             }
         }
     }
-    cout << "start : ("<<startX<<","<<startY<<")"<<endl;
-    cout << "goal : ("<<goalX<<","<<goalY<<")"<<endl;
+    clog << "start : ("<<startX<<","<<startY<<")"<<endl;
+    clog << "goal : ("<<goalX<<","<<goalY<<")"<<endl;
 
     awal = Node(startX,startY,startX,startY,goalX,goalY,0);
     awal.setGCost(0);
@@ -114,9 +114,9 @@ void Maze::solve(){
     // tunggu();
 
     while(!solved){
-        cout<<endl<<"------------------------------"<<endl;
+        clog<<endl<<"------------------------------"<<endl;
         Node t = daftarNode.top();
-        cout<<"START openSekitar FOR "<<t.getX()<<","<<t.getY()<<endl;
+        clog<<"START openSekitar FOR "<<t.getX()<<","<<t.getY()<<endl;
         nodeSudah.push_back(t);
         openSekitar(t);
         daftarNode.pop();
@@ -127,12 +127,12 @@ void Maze::solve(){
         //tunggu();
     }
 
-    cout<<endl<<endl<<endl;
+    clog<<endl<<endl<<endl;
 
     if(solved){
-        cout<<"TERSELESAIKAN"<<endl;
+        clog<<"TERSELESAIKAN"<<endl;
     }else{
-        cout<<"GAGAL"<<endl;
+        clog<<"GAGAL"<<endl;
     }
 
 
@@ -179,9 +179,9 @@ void Maze::tunggu(){
     while (!sementara.empty())
 	{
 		Node t = sementara.top();
-		cout << "origin : (" << t.getOriginX() << "," << t.getOriginY()<<")";
-        cout << "| posisi : ("<<t.getX()<<","<<t.getY()<<")";
-        cout << "| f cost :"<<t.getFCost()<<endl;
+		clog << "origin : (" << t.getOriginX() << "," << t.getOriginY()<<")";
+        clog << "| posisi : ("<<t.getX()<<","<<t.getY()<<")";
+        clog << "| f cost :"<<t.getFCost()<<endl;
 		sementara.pop();
 	}
     string abc;
