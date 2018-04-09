@@ -6,6 +6,7 @@
 using namespace std;
 
 int main(){
+	int a;
     cout<<"Maze Solver"<<endl;
     Maze maze1;
     maze1.solve();
@@ -15,6 +16,6 @@ int main(){
     }else{
         cout<<"Tidak terselesaikan"<<endl;
     }
-
+    cin>>a;
     return 0;
 }
