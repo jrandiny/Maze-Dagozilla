@@ -120,25 +120,22 @@ void Maze::solve(){
         nodeSudah.push_back(t);
         openSekitar(t);
         daftarNode.pop();
+        if(daftarNode.empty()){
+            //GAGAL
+            break;
+        }
         //tunggu();
     }
 
     cout<<endl<<endl<<endl;
-    cout<<"TERSELESAIKAN"<<endl;
 
-    cout<<"LIAT CARA"<<endl;
-
-    Node cari = finish;
-
-    while(true){
-        cout<<"("<<cari.getX()<<","<<cari.getY()<<")"<<endl;
-        if(!((cari.getX()==startX)&&(cari.getY()==startY))){
-            cari = nodeSebelum(cari);
-        }else{
-            break;
-        }
-
+    if(solved){
+        cout<<"TERSELESAIKAN"<<endl;
+    }else{
+        cout<<"GAGAL"<<endl;
     }
+
+
 
 }
 
@@ -154,6 +151,22 @@ Node Maze::nodeSebelum(Node input){
 	}
 
     return sebelum;
+}
+
+void Maze::showMove(){
+
+    Node cari = finish;
+
+    while(true){
+        cout<<"("<<cari.getX()<<","<<cari.getY()<<")"<<endl;
+        if(!((cari.getX()==startX)&&(cari.getY()==startY))){
+            cari = nodeSebelum(cari);
+        }else{
+            break;
+        }
+
+    }
+
 }
 
 bool Maze::isSolved(){

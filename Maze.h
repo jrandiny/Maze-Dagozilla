@@ -42,6 +42,7 @@ class Maze{
         bool isSolved();
         void setMaze(vector< vector<int> > peta);
         Node nodeSebelum(Node input);
+        void showMove();
 
 };
 #endif
