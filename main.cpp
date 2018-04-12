@@ -8,10 +8,18 @@ using namespace std;
 int main(){
 	int a;
 	vector< vector<int> > data;
-    cout<<"Maze Solver"<<endl;
-		Reader read;
-		data = read.baca("data.txt");
-    Maze maze1(data);
+
+    cout<<"Maze Solver"<<endl<<endl;;
+
+	Reader read;
+	cout<<"Mulai membaca maze dari file"<<endl;
+	data = read.baca("data.txt");
+	cout<<"Terbaca maze ukuran "<<data.size()<<" x "<<data[0].size()<<endl;
+
+	cout<<endl;
+	cout<<"Mencoba menyelesaikan"<<endl;
+
+	Maze maze1(data);
     maze1.solve();
     if(maze1.isSolved()){
        cout<<"Terselesaikan"<<endl;
@@ -19,6 +27,6 @@ int main(){
     }else{
        cout<<"Tidak terselesaikan"<<endl;
     }
-    cin>>a;
+    // cin>>a;
     return 0;
 }
