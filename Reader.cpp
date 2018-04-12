@@ -1,6 +1,8 @@
 #include <iostream>
-# include "Reader.h"
-# include "Maze.h"
+#include <fstream>
+#include <vector>
+#include "Reader.h"
+#include "Maze.h"
 
 using namespace std;
 
@@ -8,18 +10,19 @@ Reader::Reader(){
 
 }
 
-Maze Reader::baca(string FileName){
+vector< vector<int> > Reader::baca(string FileName){
   int baris,kolom;
   char x;
   int** a;
 
 
+
+
   baris = 0; kolom = 0;
   ifstream baca;
-  baca.open(FileName);
+  baca.open("data.txt");
   baca>>baris>>kolom;
   cout<<baris<<" "<<kolom;
-  cout<<endl;
 
 
   a = new int*[baris];
@@ -46,11 +49,25 @@ Maze Reader::baca(string FileName){
         break;
     }
     cout<<a[i][j];
-    // cout<<x;
+    //cout<<x;
     }
     cout<<endl;
     }
 
-    Maze output;
-    return output;
+    vector<vector<int> > b(baris);
+    for ( int i = 0 ; i < baris ; i++ ){
+      b[i].resize(kolom);
+}
+
+    for(int i=0;i<kolom;i++){
+      for(int j=0;j<baris;j++){
+        b[j][i] = a[j][i];
+        cout<<b[j][i];
+      }
+      cout<<endl;
+    }
+
+
+
+    return b;
 }

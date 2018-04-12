@@ -10,10 +10,10 @@ bool PembandingNode::operator()(const Node& node1, const Node& node2) const{
     return node1.getFCost() > node2.getFCost();
 }
 
-Maze::Maze(){
-    peta = {{0,2,1,0,3},{0,0,1,0,0},{0,0,1,0,0},{0,0,1,0,0},{0,0,0,0,0}}; //default value
-    solved = false;
-}
+// Maze::Maze(){
+//     peta = {{0,2,1,0,3},{0,0,1,0,0},{0,0,1,0,0},{0,0,1,0,0},{0,0,0,0,0}}; //default value
+//     solved = false;
+// }
 
 Maze::Maze(vector< vector<int> > peta){
     this->peta = peta;
@@ -156,16 +156,28 @@ Node Maze::nodeSebelum(Node input){
 void Maze::showMove(){
 
     Node cari = finish;
-
+    peta[cari.getY()][cari.getX()] = 3;
+    cari = nodeSebelum(cari);
     while(true){
         cout<<"("<<cari.getX()<<","<<cari.getY()<<")"<<endl;
+        peta[cari.getY()][cari.getX()] = 7;
         if(!((cari.getX()==startX)&&(cari.getY()==startY))){
             cari = nodeSebelum(cari);
         }else{
+            peta[startY][startX] = 2;
             break;
         }
 
+
     }
+    cout<<endl;
+    for(int i=0;i<peta.size();i++){
+      for(int j=0;j<peta[i].size();j++){
+        cout<<peta[j][i];
+      }
+      cout<<endl;
+    }
+
 
 }
 
