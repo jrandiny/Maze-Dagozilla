@@ -173,7 +173,24 @@ void Maze::showMove(){
     cout<<endl;
     for(int i=0;i<peta.size();i++){
       for(int j=0;j<peta[i].size();j++){
-        cout<<peta[j][i];
+        switch (peta[j][i]) {
+          case 1 :
+            cout<< "#";
+            break;
+          case 0 :
+            cout<< "-";
+            break;
+          case 2 :
+            cout<< "S";
+            break;
+          case 3 :
+            cout<< "D";
+            break;
+          case 7 :
+            cout<< "!";
+            break;
+        }
+
       }
       cout<<endl;
     }
