@@ -67,7 +67,7 @@ vector< vector<int> > Reader::baca(string FileName){
         clog<<endl;
     }
 
-
+    delete a;
 
     return b;
 }
