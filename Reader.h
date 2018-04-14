@@ -15,6 +15,7 @@ class Reader{
         Reader(); //default constructor
 
         vector< vector<int> > baca(string FileName);
+        vector< vector<int> > baca();
 
 };
 #endif
