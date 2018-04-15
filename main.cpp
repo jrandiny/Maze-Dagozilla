@@ -32,7 +32,7 @@ int main(){
 			}
 			case 2:{
 				cout<<"Silahkan masukkan maze"<<endl;
-				data = read.baca();
+				data = read.bacaManual();
 				break;
 			}
 			default:{
@@ -60,11 +60,7 @@ int main(){
     }else{
        cout<<"Tidak terselesaikan"<<endl;
     }
-<<<<<<< HEAD
 		read.tulisFile(maze1.getMaze());
-    cin>>a;
-=======
     // cin>>a;
->>>>>>> 209076ee9cbccc7666cd4043aa5c0d3a4ead237f
     return 0;
 }

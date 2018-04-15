@@ -11,9 +11,6 @@ Reader::Reader(){
 
 }
 
-vector< vector<int> > Reader::baca(){
-    //TODO: Implementasi baca dari layar
-}
 
 
 vector< vector<int> > Reader::baca(string FileName){
