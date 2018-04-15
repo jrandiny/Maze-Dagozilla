@@ -155,11 +155,12 @@ Node Maze::nodeSebelum(Node input){
 
 void Maze::showMove(){
 
+    clog<<"Daftar node yang dilangkah dari belakang"<<endl;
     Node cari = finish;
     peta[cari.getY()][cari.getX()] = 3;
     cari = nodeSebelum(cari);
     while(true){
-        cout<<"("<<cari.getX()<<","<<cari.getY()<<")"<<endl;
+        clog<<"("<<cari.getX()<<","<<cari.getY()<<")"<<endl;
         peta[cari.getY()][cari.getX()] = 7;
         if(!((cari.getX()==startX)&&(cari.getY()==startY))){
             cari = nodeSebelum(cari);
