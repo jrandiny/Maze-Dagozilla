@@ -19,6 +19,7 @@ int main(){
     }else{
        cout<<"Tidak terselesaikan"<<endl;
     }
+		read.tulisFile(maze1.getMaze());
     cin>>a;
     return 0;
 }

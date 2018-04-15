@@ -171,6 +171,9 @@ void Maze::showMove(){
 
     }
     cout<<endl;
+
+
+
     for(int i=0;i<peta.size();i++){
       for(int j=0;j<peta[i].size();j++){
         switch (peta[j][i]) {
@@ -219,4 +222,8 @@ void Maze::tunggu(){
 
 void Maze::setMaze(vector< vector<int> > peta){
     this->peta = peta;
+}
+
+vector< vector<int> > Maze::getMaze(){
+  return this->peta;
 }

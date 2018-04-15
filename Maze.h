@@ -43,6 +43,7 @@ class Maze{
         void setMaze(vector< vector<int> > peta);
         Node nodeSebelum(Node input);
         void showMove();
+        vector< vector<int> > getMaze();
 
 };
 #endif
