@@ -21,3 +21,26 @@ Program ini berisi logging yang sangat *verbose*, untuk mematikan ini bisa denga
 ```
 ./maze 2>maze.log
 ```
+
+## Contoh file
+
+File dimulai dengan ukuran maze lalu dilanjutkan dengan maze itu sendiri. Simbol yang digunakan adalah sebagai berikut:
+‘#’ = Tembok
+‘-’  = Jalan
+‘S’ = Mulai
+‘D’ = Akhir
+
+Contoh
+```
+10 10
+##S####D##
+##-####-##
+##-###--##
+##-###-###
+#--###-###
+#-####-###
+#---##-###
+#-#-##-###
+#-#-----##
+##########
+```
