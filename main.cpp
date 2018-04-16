@@ -10,38 +10,27 @@ int main(){
 
     cout<<"Maze Solver"<<endl<<endl;
 
-	cout<<"Pilih metode input :"<<endl;
-	cout<<"1. File"<<endl;
-	cout<<"2. Manual"<<endl;
-
-	int input;
+	string input;
 
 	Reader read;
 
 	while(true){
-		cin>>input;
-		switch(input){
-			case 1:{
-				string namaFile;
-				cout<<"Masukkan nama file : ";
-				cin>>namaFile;
-				cout<<"Mulai membaca maze dari file : "<<namaFile<<endl;
-				data = read.baca(namaFile);
-				cout<<"Terbaca maze ukuran "<<data.size()<<" x "<<data[0].size()<<endl;
-				break;
-			}
-			case 2:{
-				cout<<"Silahkan masukkan maze"<<endl;
-				data = read.bacaManual();
-				break;
-			}
-			default:{
-				input = 0;
-				break;
-			}
-		}
+		cout<<"Pilih metode input :"<<endl;
+		cout<<"1. File"<<endl;
+		cout<<"2. Manual"<<endl;
 
-		if(input != 0){
+		cin>>input;
+		if(input == "1"){
+			string namaFile;
+			cout<<"Masukkan nama file : ";
+			cin>>namaFile;
+			cout<<"Mulai membaca maze dari file : "<<namaFile<<endl;
+			data = read.baca(namaFile);
+			cout<<"Terbaca maze ukuran "<<data.size()<<" x "<<data[0].size()<<endl;
+			break;
+		}else if(input == "2"){
+			cout<<"Silahkan masukkan maze"<<endl;
+			data = read.bacaManual();
 			break;
 		}
 	}
